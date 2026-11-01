@@ -1,0 +1,23 @@
+{
+  "slug": "Seuperclidean",
+  "name": "Seuperclidean",
+  "version": "2.0.0",
+  "license": "GPL-3.0-or-later",
+  "brand": "Haer",
+  "author": "Haer",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "https://github.com/hardyfinn/seuperclidean",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "Seuperclidean",
+      "name": "Seuperclidean",
+      "description": "Six Euclidean rhythms with Bias warp, self-mutation, density/fills, swing, humanise, off-beats and logic outputs",
+      "tags": ["Sequencer", "Clock modulator", "Random", "Logic"]
+    }
+  ]
+}
