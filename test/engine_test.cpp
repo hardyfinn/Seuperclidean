@@ -62,5 +62,18 @@ int main() {
 	printf("ch4 mutation: dFill %d dRot %d dBias %.2f flips %x\n", e.ch[3].dFill, e.ch[3].dRot, e.ch[3].dBias, e.ch[3].flips);
 	show("ch4 home", e.ch[3].homeMask, 7);
 	show("ch4 now", e.ch[3].mask, 7);
+	// 4-voice setup with cross pairs, as on Seuperclidean 4
+	Engine f;
+	f.numCh = 4; f.numLogic = 4;
+	int A[4] = {0, 2, 0, 1}, B[4] = {1, 3, 2, 3};
+	for (int i = 0; i < 4; i++) { f.logicA[i] = A[i]; f.logicB[i] = B[i]; f.logicMode[i] = AND; }
+	f.ch[0].fill = 4; f.ch[1].fill = 2; f.ch[1].rot = 4; f.ch[2].fill = 8; f.ch[3].fill = 5;
+	int lr[4] = {0}; bool ll[4] = {0};
+	for (long s = 0; s < spt * 16; s++) {
+		f.process(dt, s % spt == 0, false);
+		for (int i = 0; i < 4; i++) { if (f.logic[i].high && !ll[i]) lr[i]++; ll[i] = f.logic[i].high; }
+	}
+	for (int i = 0; i < 4; i++)
+		printf("4-voice logic %d+%d AND: %d hits (expect %d)\n", A[i] + 1, B[i] + 1, lr[i], bits(f.ch[A[i]].mask & f.ch[B[i]].mask));
 	return 0;
 }

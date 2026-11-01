@@ -1,7 +1,7 @@
 {
   "slug": "Seuperclidean",
   "name": "Seuperclidean",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "GPL-3.0-or-later",
   "brand": "Haer",
   "author": "Haer",
@@ -17,7 +17,23 @@
       "slug": "Seuperclidean",
       "name": "Seuperclidean",
       "description": "Six Euclidean rhythms with Bias warp, self-mutation, density/fills, swing, humanise, off-beats and logic outputs",
-      "tags": ["Sequencer", "Clock modulator", "Random", "Logic"]
+      "tags": [
+        "Sequencer",
+        "Clock modulator",
+        "Random",
+        "Logic"
+      ]
+    },
+    {
+      "slug": "Seuperclidean4",
+      "name": "Seuperclidean 4",
+      "description": "Four biased Euclidean voices in columns with step rings, mutation, and four cross-pair logic outputs",
+      "tags": [
+        "Sequencer",
+        "Clock modulator",
+        "Random",
+        "Logic"
+      ]
     }
   ]
 }

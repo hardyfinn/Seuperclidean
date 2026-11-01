@@ -21,7 +21,8 @@ namespace ew {
 
 static const int NUM_CH = 6;
 static const int MAX_LEN = 32;
-static const int NUM_LOGIC = 3;
+static const int NUM_LOGIC = 3;   // logic outputs on the 6-channel module
+static const int MAX_LOGIC = 4;   // the most any module uses
 
 enum LogicMode { AND = 0, OR, XOR, ANOTB, NUM_LOGIC_MODES };
 
@@ -133,8 +134,13 @@ struct Channel {
 
 struct Engine {
 	Channel ch[NUM_CH];
-	Out logic[NUM_LOGIC];
-	int logicMode[NUM_LOGIC] = {AND, XOR, OR};
+	Out logic[MAX_LOGIC];
+	int logicMode[MAX_LOGIC] = {AND, XOR, OR, OR};
+	// which channels each logic output compares (default pairs 1+2, 3+4, 5+6)
+	int logicA[MAX_LOGIC] = {0, 2, 4, 1};
+	int logicB[MAX_LOGIC] = {1, 3, 5, 3};
+	int numCh = NUM_CH;
+	int numLogic = NUM_LOGIC;
 
 	// global settings
 	float density = 0.f;    // -1..1, adds or removes hits on every channel
@@ -152,18 +158,18 @@ struct Engine {
 	Rng rng;
 
 	void reset() {
-		for (int c = 0; c < NUM_CH; c++) ch[c].step = -1;
+		for (int c = 0; c < numCh; c++) ch[c].step = -1;
 		globalStep = -1;
 	}
 
 	void home() {
-		for (int c = 0; c < NUM_CH; c++) ch[c].clearMutation();
+		for (int c = 0; c < numCh; c++) ch[c].clearMutation();
 		updatePatterns();
 	}
 
 	// Recompute every channel's pattern from settings + mutation offsets.
 	void updatePatterns() {
-		for (int c = 0; c < NUM_CH; c++) {
+		for (int c = 0; c < numCh; c++) {
 			Channel& k = ch[c];
 			int len = std::max(1, std::min(MAX_LEN, k.len));
 			int fill = (int) std::lround(k.fill + density * len);
@@ -236,7 +242,7 @@ struct Engine {
 			bool oddStep = (globalStep & 1) != 0;
 
 			// advance each channel; mutate when a channel starts a new cycle
-			for (int c = 0; c < NUM_CH; c++) {
+			for (int c = 0; c < numCh; c++) {
 				Channel& k = ch[c];
 				int len = std::max(1, std::min(MAX_LEN, k.len));
 				int prev = k.step;
@@ -249,7 +255,7 @@ struct Engine {
 			updatePatterns();
 
 			double gl = stepGate();
-			for (int c = 0; c < NUM_CH; c++) {
+			for (int c = 0; c < numCh; c++) {
 				Channel& k = ch[c];
 				k.hit = (k.mask >> k.step) & 1u;
 				double swingDelay = oddStep ? 0.5 * k.swing * period : 0.0;
@@ -263,8 +269,8 @@ struct Engine {
 					k.off.schedule(d, gl);
 				}
 			}
-			for (int i = 0; i < NUM_LOGIC; i++) {
-				bool a = ch[2 * i].hit, b = ch[2 * i + 1].hit;
+			for (int i = 0; i < numLogic; i++) {
+				bool a = ch[logicA[i]].hit, b = ch[logicB[i]].hit;
 				bool o = false;
 				switch (logicMode[i]) {
 					case AND: o = a && b; break;
@@ -273,17 +279,17 @@ struct Engine {
 					default: o = a && !b; break;
 				}
 				if (o) {
-					double swingDelay = oddStep ? 0.5 * ch[2 * i].swing * period : 0.0;
+					double swingDelay = oddStep ? 0.5 * ch[logicA[i]].swing * period : 0.0;
 					logic[i].schedule(swingDelay, gl);
 				}
 			}
 		}
-		for (int c = 0; c < NUM_CH; c++) {
+		for (int c = 0; c < numCh; c++) {
 			ch[c].gate.process(dt);
 			ch[c].off.process(dt);
 			ch[c].acc.process(dt);
 		}
-		for (int i = 0; i < NUM_LOGIC; i++) logic[i].process(dt);
+		for (int i = 0; i < numLogic; i++) logic[i].process(dt);
 	}
 };
 

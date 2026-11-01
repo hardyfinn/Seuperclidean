@@ -1,8 +1,9 @@
 # Seuperclidean
 
-A VCV Rack 2 module: six Euclidean rhythms (Toussaint / Bjorklund) with a
+A VCV Rack 2 plugin. **Seuperclidean**: six Euclidean rhythms (Toussaint / Bjorklund) with a
 **Bias** warp, self-mutation, density and fills, swing and humanise, and logic
-outputs that combine channel pairs.
+outputs that combine channel pairs. **Seuperclidean 4**: the same with four
+voices in columns (see below).
 
 ## Per channel (rows 1 to 6)
 
@@ -72,6 +73,19 @@ The logic outputs use the first channel's swing.
 **CLOCK** takes 16th notes. **RESET** sends every channel back to step 1 on
 the next clock. Right-click to choose trigger (5 ms) or gate (half a step)
 outputs.
+
+## Seuperclidean 4
+
+A 24 HP four-voice version in the same plugin. Each voice has its own column
+under a step ring (with the same controls as a row on the 6-channel module),
+and the ring's centre shows hits/length. There are four logic outputs: **1+2**,
+**3+4**, and the cross pairs **1+3** and **2+4**. Click the mode readout above
+an output to change it (AND, OR, XOR, ONLY n = the first voice hits and the
+second doesn't).
+
+The bottom strip has CLOCK, RESET, FILL gate, DENS (density) and MUT (mutate)
+trimpots, and LOCK. Fill amount, Home and the output shape are in the
+right-click menu.
 
 ## Building
 
