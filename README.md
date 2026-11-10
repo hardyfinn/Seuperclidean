@@ -76,7 +76,7 @@ outputs.
 
 ## Seuperclidean 4
 
-A 24 HP four-voice version in the same plugin. Each voice has its own column
+A 28 HP four-voice version in the same plugin. Each voice has its own column
 under a step ring (with the same controls as a row on the 6-channel module),
 and the ring's centre shows hits/length. There are four logic outputs: **1+2**,
 **3+4**, and the cross pairs **1+3** and **2+4**. Click the mode readout above
