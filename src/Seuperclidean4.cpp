@@ -11,11 +11,11 @@ using ew::MAX_LEN;
 namespace s4 {
 static const int NV = 4;  // voices
 static const int NL = 4;  // logic outputs
-static const float COL_X[NV] = {15.5f, 45.5f, 76.f, 106.f};
+static const float COL_X[NV] = {19.5f, 54.f, 88.5f, 123.f};
 static const float RING_Y = 26.f, RING_R = 9.5f;
 static const float Y_KNOB1 = 46.f, Y_KNOB2 = 58.5f, Y_TRIM = 70.5f, Y_CV = 82.f, Y_OUT = 94.6f;
 static const float Y_BOTTOM = 111.6f;
-static const float LOGIC_X[NL] = {72.f, 85.f, 98.f, 111.f};
+static const float LOGIC_X[NL] = {80.f, 96.f, 112.f, 128.f};
 static const float Y_MODE = 110.6f, Y_LOGIC_OUT = 119.f;
 static const int PAIR_A[NL] = {0, 2, 0, 1};
 static const int PAIR_B[NL] = {1, 3, 2, 3};
@@ -353,27 +353,27 @@ struct Seuperclidean4Widget : ModuleWidget {
 			ring->voice = i;
 			addChild(ring);
 
-			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x - 6.5f, Y_KNOB1)), module, S::LEN_PARAM + i));
-			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x + 6.5f, Y_KNOB1)), module, S::FILL_PARAM + i));
-			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x - 6.5f, Y_KNOB2)), module, S::ROT_PARAM + i));
-			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x + 6.5f, Y_KNOB2)), module, S::BIAS_PARAM + i));
-			addParam(createParamCentered<Trimpot>(mm2px(Vec(x - 8.5f, Y_TRIM)), module, S::SWING_PARAM + i));
+			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x - 7.f, Y_KNOB1)), module, S::LEN_PARAM + i));
+			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x + 7.f, Y_KNOB1)), module, S::FILL_PARAM + i));
+			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x - 7.f, Y_KNOB2)), module, S::ROT_PARAM + i));
+			addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(x + 7.f, Y_KNOB2)), module, S::BIAS_PARAM + i));
+			addParam(createParamCentered<Trimpot>(mm2px(Vec(x - 10.f, Y_TRIM)), module, S::SWING_PARAM + i));
 			addParam(createParamCentered<Trimpot>(mm2px(Vec(x, Y_TRIM)), module, S::HUMAN_PARAM + i));
-			addParam(createParamCentered<Trimpot>(mm2px(Vec(x + 8.5f, Y_TRIM)), module, S::MUT_PARAM + i));
-			addInput(createInputCentered<PJ301MPort>(mm2px(Vec(x - 9.f, Y_CV)), module, S::FILL_CV_INPUT + i));
+			addParam(createParamCentered<Trimpot>(mm2px(Vec(x + 10.f, Y_TRIM)), module, S::MUT_PARAM + i));
+			addInput(createInputCentered<PJ301MPort>(mm2px(Vec(x - 10.5f, Y_CV)), module, S::FILL_CV_INPUT + i));
 			addInput(createInputCentered<PJ301MPort>(mm2px(Vec(x, Y_CV)), module, S::ROT_CV_INPUT + i));
-			addInput(createInputCentered<PJ301MPort>(mm2px(Vec(x + 9.f, Y_CV)), module, S::BIAS_CV_INPUT + i));
-			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(x - 9.f, Y_OUT)), module, S::GATE_OUTPUT + i));
+			addInput(createInputCentered<PJ301MPort>(mm2px(Vec(x + 10.5f, Y_CV)), module, S::BIAS_CV_INPUT + i));
+			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(x - 10.5f, Y_OUT)), module, S::GATE_OUTPUT + i));
 			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(x, Y_OUT)), module, S::OFF_OUTPUT + i));
-			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(x + 9.f, Y_OUT)), module, S::ACC_OUTPUT + i));
+			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(x + 10.5f, Y_OUT)), module, S::ACC_OUTPUT + i));
 		}
 
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(9.f, Y_BOTTOM)), module, S::CLOCK_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(19.f, Y_BOTTOM)), module, S::RESET_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(29.f, Y_BOTTOM)), module, S::FILL_INPUT));
-		addParam(createParamCentered<Trimpot>(mm2px(Vec(39.f, Y_BOTTOM)), module, S::DENSITY_PARAM));
-		addParam(createParamCentered<Trimpot>(mm2px(Vec(49.f, Y_BOTTOM)), module, S::MUTATE_PARAM));
-		addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(58.f, Y_BOTTOM)), module, S::LOCK_BUTTON, S::LOCK_LIGHT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(21.f, Y_BOTTOM)), module, S::RESET_INPUT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(33.f, Y_BOTTOM)), module, S::FILL_INPUT));
+		addParam(createParamCentered<Trimpot>(mm2px(Vec(44.f, Y_BOTTOM)), module, S::DENSITY_PARAM));
+		addParam(createParamCentered<Trimpot>(mm2px(Vec(54.f, Y_BOTTOM)), module, S::MUTATE_PARAM));
+		addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(64.f, Y_BOTTOM)), module, S::LOCK_BUTTON, S::LOCK_LIGHT));
 
 		for (int i = 0; i < NL; i++) {
 			LogicModeButton* b = createWidget<LogicModeButton>(mm2px(Vec(LOGIC_X[i] - 5.5f, Y_MODE - 2.2f)));

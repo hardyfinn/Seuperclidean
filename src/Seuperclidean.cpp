@@ -13,13 +13,13 @@ using ew::MAX_LEN;
 
 // ---- layout (mm), shared with res/make_panel.py ----
 static const float ROW_Y0 = 48.f, ROW_DY = 12.5f;
-static const float X_LEN = 12.f, X_FILL = 22.f, X_ROT = 32.f, X_BIAS = 42.f;
-static const float X_SWG = 51.5f, X_HUM = 59.5f, X_MUT = 67.5f;
-static const float X_CFILL = 77.f, X_CROT = 86.f, X_CBIAS = 95.f;
-static const float X_GATE = 105.f, X_OFF = 114.f, X_ACC = 123.f;
-static const float RA = 139.f, RB = 151.f, RC = 163.f;
-static const float DISP_X = 5.f, DISP_Y = 13.5f, DISP_W = 122.f, DISP_H = 23.f;
-static const float LOGIC_Y[NUM_LOGIC] = {83.f, 97.f, 111.f};
+static const float X_LEN = 12.f, X_FILL = 23.f, X_ROT = 34.f, X_BIAS = 45.f;
+static const float X_SWG = 55.5f, X_HUM = 65.f, X_MUT = 74.5f;
+static const float X_CFILL = 85.f, X_CROT = 95.f, X_CBIAS = 105.f;
+static const float X_GATE = 116.f, X_OFF = 126.f, X_ACC = 136.f;
+static const float RA = 155.f, RB = 169.f, RC = 183.f;
+static const float DISP_X = 5.f, DISP_Y = 13.5f, DISP_W = 137.f, DISP_H = 21.f;
+static const float LOGIC_Y[NUM_LOGIC] = {84.6f, 98.6f, 112.6f};
 
 struct Seuperclidean : Module {
 	enum ParamId {
@@ -351,7 +351,7 @@ struct SeuperclideanWidget : ModuleWidget {
 			float y = LOGIC_Y[i];
 			addParam(createParamCentered<TL1105>(mm2px(Vec(RA - 1.f, y + 1.5f)), module, S::LOGIC_BUTTON + i));
 			for (int m = 0; m < 4; m++)
-				addChild(createLightCentered<TinyLight<YellowLight>>(mm2px(Vec(146.f, y - 3.6f + m * 2.4f)), module, S::LOGIC_LIGHT + i * 4 + m));
+				addChild(createLightCentered<TinyLight<YellowLight>>(mm2px(Vec(RA + 7.f, y - 4.4f + m * 2.9f)), module, S::LOGIC_LIGHT + i * 4 + m));
 			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(RC + 2.f, y)), module, S::LOGIC_OUTPUT + i));
 		}
 	}
