@@ -126,3 +126,9 @@ svg = (
 with open(os.path.join(HERE, "Seuperclidean.svg"), "w") as fh:
     fh.write(svg)
 print("wrote Seuperclidean.svg")
+
+# --- Haer maker logo (res/haer_logo.py), placed clear of the jacks and rail artwork
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+import haer_logo
+haer_logo.add_to_file(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "Seuperclidean.svg"), x=103.89, y=126.0, cap=3.0, bg='#ECE6DA')
